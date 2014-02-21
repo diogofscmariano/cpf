@@ -98,6 +98,9 @@ public abstract class FileBasedResourceAccess implements IRWAccess {
   }
 
   private List<IBasicFile> listFiles(List<IBasicFile> list, File root, FileFilter filter, boolean includeDirs, boolean showHiddenFilesAndFolders, int depth) {
+    if(root.isHidden() && !showHiddenFilesAndFolders) {
+      return list;
+    }
 
     if (root.isDirectory()) {
       if (includeDirs && filter.accept(root)) {
